@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { Navbar } from '@components';
+import { Navbar, Preloader } from '@components';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
 const ComiscPage = lazy(() => import('../pages/ComicsPage'));
@@ -12,8 +12,9 @@ export const AppRouter: React.FC = () => {
     <BrowserRouter>
       <div className="page">
         <Navbar />
+        <Preloader />
         <div className="content">
-          <Suspense fallback={<div>PRELOAD...</div>}>
+          <Suspense fallback={<Preloader />}>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/comics/:heroId" element={<ComiscPage />} />
