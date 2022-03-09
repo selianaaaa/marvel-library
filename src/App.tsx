@@ -5,7 +5,7 @@ import { store } from './store';
 import { GlobalStyles } from './style';
 import { AppRouter } from './router';
 
-export const App: React.FC = () => {
+const App: React.FC = () => {
   return (
     <div className="App">
       <Provider store={store}>
@@ -15,3 +15,5 @@ export const App: React.FC = () => {
     </div>
   );
 };
+
+export default App;

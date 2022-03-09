@@ -1,7 +1,7 @@
 /* ============= Colors ============= */
 export const colors = {
-  primary: '#202020',
-  secondary: '#f0141e',
+  PRIMARY: '#202020',
+  SECONDARY: '#f0141e',
 };
 
 /* ============= Adaptive ============= */
