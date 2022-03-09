@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
-
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -23,6 +22,7 @@
     "declaration": true,
     "noUnusedParameters": false
   },
+  "extends": "./tsconfig.paths.json",
   "include": ["src"],
   "exclude": ["node_modules"]
 }
