@@ -7,7 +7,9 @@
       "@style": ["src/style"],
       "@services": ["src/services"],
       "@utils": ["src/utils"],
-      "@assets": ["src/assets"]
+      "@assets": ["src/assets"],
+      "@types": ["src/types"],
+      "@store": ["src/store"]
     }
   }
 }

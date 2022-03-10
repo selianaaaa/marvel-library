@@ -3,35 +3,24 @@ import {
   applyMiddleware,
   Store,
   combineReducers,
-  compose,
-  CombinedState,
-  AnyAction,
+  Reducer,
 } from 'redux';
-import { Reducer } from 'react';
-import thunk, { ThunkDispatch } from 'redux-thunk';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { routerMiddleware } from 'react-router-redux';
+import { createBrowserHistory } from 'history';
 
-import { createBrowserHistory, History } from 'history';
+import { IAppState } from '@types';
+import { superheroesReducer } from './reducers';
 
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION__: any;
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
-  }
-}
-
-const rootReducer = (history: History) => combineReducers({});
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const rootReducer: Reducer<IAppState> = combineReducers<IAppState>({
+  superheroes: superheroesReducer,
+});
+const composeEnhancers = composeWithDevTools({});
 
 export const history = createBrowserHistory();
 
-export const store = createStore(
-  rootReducer(history),
-  // composeEnhancers(
-  //   applyMiddleware(
-  //     routerMiddleware(history),
-  //     thunk,
-  //     websocketMiddleware
-  //   )
-  // )
+export const store: Store<IAppState> = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(routerMiddleware(history), thunk)),
 );
