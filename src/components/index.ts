@@ -1,2 +1,4 @@
-export * from './_Navbar';
-export * from './_Preloader';
+export * from './navbars';
+export * from './preloaders';
+export * from './inputs';
+export * from './icons';

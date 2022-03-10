@@ -20,7 +20,7 @@ export interface IMarvelResponseData<Result> {
   limit: number;
   total: number;
   count: number;
-  result: Result;
+  results: Result;
 }
 
 export interface IMarvelResponse<Result> {

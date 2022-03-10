@@ -6,7 +6,7 @@ import { encodeMd5 } from '@utils';
 
 export class SuperheroesService {
   /**
-   * The request to get the list of characters
+   * The request to get list of comic characters
    */
   getCharacters() {
     const timeStamp = new Date().getTime();

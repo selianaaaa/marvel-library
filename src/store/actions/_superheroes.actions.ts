@@ -12,7 +12,7 @@ export const createSuperheroesActions = (
   superheroesService: SuperheroesService,
 ) => {
   /**
-   *  Set the list of characters
+   *  Set the list of comic characters
    * @param {ICharacter[] | null} characters - list of characters
    */
   const setCharacters = (characters: ICharacter[] | null): IAppAction => ({
@@ -21,7 +21,7 @@ export const createSuperheroesActions = (
   });
 
   /**
-   *  Set characters request
+   *  Set comic characters request
    * @param {boolean} inRequest - define the characters request status
    */
   const setCharactersRequest = (inRequest: boolean): IAppAction => ({
@@ -30,21 +30,19 @@ export const createSuperheroesActions = (
   });
 
   /**
-   * Executing the request to get characters
+   * Executing the request to get list of comic characters
    */
   const getCharacters = (): ThunkResult<void> => {
     return async (dispatch) => {
       dispatch(setCharactersRequest(true));
       try {
-        const response = await superheroesService.getCharacters();
+        const { status, data } = await superheroesService.getCharacters();
 
-        console.log('response', response);
-        // if (ok) {
-        //   // dispatch(setTaggedNews(data));
-        // }
+        if (status === httpStatuses.OK) {
+          dispatch(setCharacters(data.data.results));
+        }
       } catch (error) {
         console.log(error);
-        // alert(error);
       }
       dispatch(setCharactersRequest(false));
     };

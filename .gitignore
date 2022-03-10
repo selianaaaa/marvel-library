@@ -4,6 +4,7 @@ build
 .idea
 yarn-error.log
 tsconfig.tsbuildinfo
+.env
 
 npm-debug.log*
 yarn-debug.log*
