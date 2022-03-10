@@ -4,6 +4,7 @@ import { ISuperheroesState, superheroesActionTypes, IAppAction } from '@types';
 export const initialState: ISuperheroesState = {
   characters: null,
   characters_request: false,
+  selected_character: null,
 };
 
 export const superheroesReducer: Reducer<ISuperheroesState> = (
@@ -21,6 +22,11 @@ export const superheroesReducer: Reducer<ISuperheroesState> = (
       return {
         ...state,
         characters_request: payload,
+      };
+    case superheroesActionTypes.SET_SELECTED_CHARACTER:
+      return {
+        ...state,
+        selected_character: payload,
       };
     default:
       return state;

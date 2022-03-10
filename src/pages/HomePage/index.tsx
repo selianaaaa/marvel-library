@@ -79,7 +79,7 @@ const $HomePage = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  padding-top: 30px;
+  padding: 30px;
   display: grid;
   grid-template-rows: 30px 1fr 50px;
   gap: 30px;

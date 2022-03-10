@@ -5,6 +5,7 @@ import {
   ThunkResult,
   IRequestError,
   ICharactersData,
+  ICharacter,
 } from '@types';
 import { httpStatuses } from '@constants';
 
@@ -94,11 +95,21 @@ export const createSuperheroesActions = (
     };
   };
 
+  /**
+   *  Set selected comic character
+   * @param {ICharacter | null} character - selected comic character
+   */
+  const setSelectedCharacter = (character: ICharacter | null): IAppAction => ({
+    type: superheroesActionTypes.SET_SELECTED_CHARACTER,
+    payload: character,
+  });
+
   return {
     setCharacters,
     setCharactersRequest,
     getCharacters,
     addCharacters,
     getMoreCharacters,
+    setSelectedCharacter,
   };
 };

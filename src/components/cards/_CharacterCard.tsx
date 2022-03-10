@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { ICharacter } from '@types';
 import { colors } from '@style';
+import { superheroesActions } from '@store';
 
 interface ICharacterCard {
   character: ICharacter;
@@ -14,10 +16,18 @@ interface ICharacterCard {
  * @param {ICharacterCard} character - character info
  */
 export const CharacterCard: React.FC<ICharacterCard> = ({ character }) => {
+  const dispatch = useDispatch();
+
   const { thumbnail: image, name, comics, id } = character;
 
   return (
-    <$Character as={Link} to={`/comics/${id}`}>
+    <$Character
+      as={Link}
+      to={`/comics/${id}`}
+      onClick={() =>
+        dispatch(superheroesActions.setSelectedCharacter(character))
+      }
+    >
       <$ImageWrapper>
         <$Image imgUrl={`${image.path}.${image.extension}`} />
       </$ImageWrapper>
