@@ -29,7 +29,9 @@ const HomePage: React.FC = () => {
   const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
-    dispatch(superheroesActions.getCharacters());
+    if (!characters) {
+      dispatch(superheroesActions.getCharacters());
+    }
   }, []);
 
   if (charactersRequest) {

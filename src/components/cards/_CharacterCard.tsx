@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { ICharacter } from '@types';
 import { colors } from '@style';
@@ -13,10 +14,10 @@ interface ICharacterCard {
  * @param {ICharacterCard} character - character info
  */
 export const CharacterCard: React.FC<ICharacterCard> = ({ character }) => {
-  const { thumbnail: image, name, comics } = character;
+  const { thumbnail: image, name, comics, id } = character;
 
   return (
-    <$Character>
+    <$Character as={Link} to={`/comics/${id}`}>
       <$ImageWrapper>
         <$Image imgUrl={`${image.path}.${image.extension}`} />
       </$ImageWrapper>
@@ -85,6 +86,7 @@ const $Character = styled.div`
   grid-template-rows: 165px 1fr;
   background: ${colors.PRIMARY};
   clip-path: polygon(0 0, 100% 0, 100% 92%, 83% 100%, 0 100%);
+  text-decoration: none;
   cursor: pointer;
 
   &:hover {
