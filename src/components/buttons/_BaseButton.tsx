@@ -6,8 +6,13 @@ import { colors, baseRow } from '@style';
 export const BaseButton: React.FC<ComponentProps<'button'>> = ({
   children,
   onClick,
+  disabled,
 }) => {
-  return <$Button onClick={onClick}>{children}</$Button>;
+  return (
+    <$Button onClick={onClick} disabled={disabled}>
+      {children}
+    </$Button>
+  );
 };
 
 const $Button = styled.button`
@@ -28,5 +33,10 @@ const $Button = styled.button`
 
   &:active {
     background-color: red;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 `;

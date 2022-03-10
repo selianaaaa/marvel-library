@@ -8,7 +8,7 @@ export class SuperheroesService {
   /**
    * The request to get list of comic characters
    */
-  getCharacters() {
+  getCharacters(offset = 0) {
     const timeStamp = new Date().getTime();
     const privateKey = process.env.REACT_APP_MARVEL_PRIVITE_KEY;
     const publicKey = process.env.REACT_APP_MARVEL_PUBLIC_KEY;
@@ -20,6 +20,11 @@ export class SuperheroesService {
 
     return axios.get<IMarvelResponse<ICharacter[]>>(
       `${urlsConstants.MARVEL_URL}/characters?ts=${timeStamp}&apikey=${publicKey}&hash=${hash}`,
+      {
+        params: {
+          offset: offset,
+        },
+      },
     );
   }
 }

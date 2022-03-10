@@ -10,13 +10,7 @@ import {
   BaseButton,
 } from '@components';
 import { superheroesActions } from '@store';
-import { ISuperheroesState, ICharactersData } from '@types';
-import { colors } from '@style';
-
-// interface IHomePage {
-//   characters: ICharactersData | null;
-//   charactersRequest: boolean;
-// }
+import { ISuperheroesState } from '@types';
 
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();
@@ -68,7 +62,10 @@ const HomePage: React.FC = () => {
       </$SearchResult>
 
       <$Bottom>
-        <BaseButton onClick={() => console.log('CHARACTERS')}>
+        <BaseButton
+          disabled={characters.offset >= characters.total}
+          onClick={() => dispatch(superheroesActions.getMoreCharacters())}
+        >
           LOAD MORE
         </BaseButton>
       </$Bottom>
