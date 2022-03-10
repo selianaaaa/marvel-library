@@ -20,7 +20,7 @@ const $Navbar = styled.div`
   position: relative;
   width: 100%;
   height: 70px;
-  background: ${colors.PRIMARY};
+  background: ${colors.PRIMARY_100};
   ${baseRow()};
 `;
 

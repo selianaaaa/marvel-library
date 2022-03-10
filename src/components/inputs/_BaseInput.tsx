@@ -49,13 +49,13 @@ const $Input = styled.input`
   border: none;
   outline: none;
   box-sizing: border-box;
-  border-bottom: 4px solid ${colors.PRIMARY};
+  border-bottom: 4px solid ${colors.PRIMARY_100};
   padding-bottom: 10px;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
-  color: ${colors.PRIMARY};
+  color: ${colors.PRIMARY_100};
 
   &::placeholder {
     color: ${colors.GRAY};

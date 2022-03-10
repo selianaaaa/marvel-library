@@ -11,7 +11,7 @@ import { colors } from '@style';
  * @param {string} className - external class
  */
 export const SearchIcon: React.FC<IBaseIcon> = ({
-  fill = colors.PRIMARY,
+  fill = colors.PRIMARY_100,
   width = '100%',
   height = '100%',
   className = '',

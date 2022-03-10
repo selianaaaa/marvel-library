@@ -84,7 +84,7 @@ const $Character = styled.div`
   height: 300px;
   display: grid;
   grid-template-rows: 165px 1fr;
-  background: ${colors.PRIMARY};
+  background: ${colors.PRIMARY_100};
   clip-path: polygon(0 0, 100% 0, 100% 92%, 83% 100%, 0 100%);
   text-decoration: none;
   cursor: pointer;
