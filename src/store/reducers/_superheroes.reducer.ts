@@ -15,7 +15,7 @@ export const superheroesReducer: Reducer<ISuperheroesState> = (
       console.log('SET_CHARACTERS', payload);
       return {
         ...state,
-        superheroes: payload,
+        characters: payload,
       };
     case superheroesActionTypes.SET_CHARACTERS_REQUEST:
       return {

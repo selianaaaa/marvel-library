@@ -62,7 +62,7 @@ const $Input = styled.input`
   }
 `;
 
-export const $Icon = styled.span`
+const $Icon = styled.span`
   position: absolute;
   width: 25px;
   height: 25px;

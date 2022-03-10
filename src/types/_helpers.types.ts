@@ -8,6 +8,14 @@ export interface ICharacter {
     extension: string;
   };
   resourceURI: string;
+  comics: {
+    available: number;
+    collectionURI: string;
+    items: {
+      name: string;
+      resourceURI: string;
+    };
+  };
 }
 
 export interface IRequestError {
@@ -32,3 +40,5 @@ export interface IMarvelResponse<Result> {
   etag: string;
   data: IMarvelResponseData<Result>;
 }
+
+export type ICharactersData = IMarvelResponseData<ICharacter[]>;

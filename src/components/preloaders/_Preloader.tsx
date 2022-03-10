@@ -51,7 +51,7 @@ const $Circle = styled.div`
   border-style: solid;
   border-color: hsla(0, 0%, 100%, 0);
   border-radius: 50%;
-  animation: ${zoom} 2s ease-in infinite;
+  animation: ${zoom} 1s ease-in infinite;
 
   &:after {
     content: '';

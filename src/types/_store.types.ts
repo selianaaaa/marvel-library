@@ -1,7 +1,7 @@
 import { ThunkAction } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
-import { ICharacter } from './_helpers.types';
+import { ICharactersData } from './_helpers.types';
 
 export enum superheroesActionTypes {
   SET_CHARACTERS = 'set characters',
@@ -9,7 +9,7 @@ export enum superheroesActionTypes {
 }
 
 export interface ISuperheroesState {
-  characters: ICharacter[] | null;
+  characters: ICharactersData | null;
   characters_request: boolean;
 }
 

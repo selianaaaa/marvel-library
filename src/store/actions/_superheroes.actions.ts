@@ -1,10 +1,10 @@
 import { SuperheroesService } from '@services';
 import {
-  ICharacter,
   superheroesActionTypes,
   IAppAction,
   ThunkResult,
   IRequestError,
+  ICharactersData,
 } from '@types';
 import { httpStatuses } from '@constants';
 
@@ -12,10 +12,10 @@ export const createSuperheroesActions = (
   superheroesService: SuperheroesService,
 ) => {
   /**
-   *  Set the list of comic characters
-   * @param {ICharacter[] | null} characters - list of characters
+   *  Set data about comic characters
+   * @param {ICharactersData | null} characters - list of characters
    */
-  const setCharacters = (characters: ICharacter[] | null): IAppAction => ({
+  const setCharacters = (characters: ICharactersData | null): IAppAction => ({
     type: superheroesActionTypes.SET_CHARACTERS,
     payload: characters,
   });
@@ -30,7 +30,7 @@ export const createSuperheroesActions = (
   });
 
   /**
-   * Executing the request to get list of comic characters
+   * Executing the request to get data about comic characters
    */
   const getCharacters = (): ThunkResult<void> => {
     return async (dispatch) => {
@@ -39,7 +39,7 @@ export const createSuperheroesActions = (
         const { status, data } = await superheroesService.getCharacters();
 
         if (status === httpStatuses.OK) {
-          dispatch(setCharacters(data.data.results));
+          dispatch(setCharacters(data.data));
         }
       } catch (error) {
         console.log(error);
