@@ -1,27 +1,16 @@
 import { ThunkAction } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
-export interface ISuperHero {
-  id: number;
-  name: string;
-  description: string;
-  modified: string;
-  thumbnail: {
-    path: string;
-    extension: string;
-  };
-  resourceURI: string;
-}
+import { ICharacter } from './_helpers.types';
 
 export enum superheroesActionTypes {
-  // GET_SUPERHEROES = 'get superheroes',
-  SET_SUPERHEROES = 'set superheroes',
-  SET_SUPERHEROES_REQUEST = 'set superheroes request',
+  SET_CHARACTERS = 'set characters',
+  SET_CHARACTERS_REQUEST = 'set characters request',
 }
 
 export interface ISuperheroesState {
-  superheroes: ISuperHero[] | null;
-  superheroes_request: boolean;
+  characters: ICharacter[] | null;
+  characters_request: boolean;
 }
 
 export interface IAppState {

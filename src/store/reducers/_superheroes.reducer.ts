@@ -2,8 +2,8 @@ import { Reducer } from 'redux';
 import { ISuperheroesState, superheroesActionTypes, IAppAction } from '@types';
 
 export const initialState: ISuperheroesState = {
-  superheroes: null,
-  superheroes_request: false,
+  characters: null,
+  characters_request: false,
 };
 
 export const superheroesReducer: Reducer<ISuperheroesState> = (
@@ -11,16 +11,16 @@ export const superheroesReducer: Reducer<ISuperheroesState> = (
   { type, payload }: IAppAction,
 ) => {
   switch (type) {
-    case superheroesActionTypes.SET_SUPERHEROES:
-      console.log('SET_SUPERHEROES', payload);
+    case superheroesActionTypes.SET_CHARACTERS:
+      console.log('SET_CHARACTERS', payload);
       return {
         ...state,
         superheroes: payload,
       };
-    case superheroesActionTypes.SET_SUPERHEROES_REQUEST:
+    case superheroesActionTypes.SET_CHARACTERS_REQUEST:
       return {
         ...state,
-        superheroes_request: payload,
+        characters_request: payload,
       };
     default:
       return state;

@@ -1,15 +1,14 @@
 import axios from 'axios';
 
-import { ISuperHero } from '@types';
+import { ICharacter, IMarvelResponse } from '@types';
 import { urlsConstants } from '@constants';
 import { encodeMd5 } from '@utils';
 
 export class SuperheroesService {
   /**
-   * The request to get the list of superheroes
+   * The request to get the list of characters
    */
-  getSuperheroes() {
-    console.log(process.env);
+  getCharacters() {
     const timeStamp = new Date().getTime();
     const privateKey = process.env.REACT_APP_MARVEL_PRIVITE_KEY;
     const publicKey = process.env.REACT_APP_MARVEL_PUBLIC_KEY;
@@ -19,7 +18,7 @@ export class SuperheroesService {
       publicKey,
     });
 
-    return axios.get<ISuperHero[]>(
+    return axios.get<IMarvelResponse<ICharacter[]>>(
       `${urlsConstants.MARVEL_URL}/characters?ts=${timeStamp}&apikey=${publicKey}&hash=${hash}`,
     );
   }

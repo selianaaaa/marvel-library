@@ -1,6 +1,6 @@
 import { SuperheroesService } from '@services';
 import {
-  ISuperHero,
+  ICharacter,
   superheroesActionTypes,
   IAppAction,
   ThunkResult,
@@ -12,31 +12,31 @@ export const createSuperheroesActions = (
   superheroesService: SuperheroesService,
 ) => {
   /**
-   *  Set the list of superheroes
-   * @param {ISuperHero[] | null} superheroes - list of superheroes
+   *  Set the list of characters
+   * @param {ICharacter[] | null} characters - list of characters
    */
-  const setSuperheroes = (superheroes: ISuperHero[] | null): IAppAction => ({
-    type: superheroesActionTypes.SET_SUPERHEROES,
-    payload: superheroes,
+  const setCharacters = (characters: ICharacter[] | null): IAppAction => ({
+    type: superheroesActionTypes.SET_CHARACTERS,
+    payload: characters,
   });
 
   /**
-   *  Set superheroes request
-   * @param {boolean} inRequest - define the superheroes request status
+   *  Set characters request
+   * @param {boolean} inRequest - define the characters request status
    */
-  const setSuperheroesRequest = (inRequest: boolean): IAppAction => ({
-    type: superheroesActionTypes.SET_SUPERHEROES_REQUEST,
+  const setCharactersRequest = (inRequest: boolean): IAppAction => ({
+    type: superheroesActionTypes.SET_CHARACTERS_REQUEST,
     payload: inRequest,
   });
 
   /**
-   * Executing the request to get superheroes
+   * Executing the request to get characters
    */
-  const getSuperheroes = (): ThunkResult<void> => {
+  const getCharacters = (): ThunkResult<void> => {
     return async (dispatch) => {
-      dispatch(setSuperheroesRequest(true));
+      dispatch(setCharactersRequest(true));
       try {
-        const response = await superheroesService.getSuperheroes();
+        const response = await superheroesService.getCharacters();
 
         console.log('response', response);
         // if (ok) {
@@ -46,13 +46,13 @@ export const createSuperheroesActions = (
         console.log(error);
         // alert(error);
       }
-      dispatch(setSuperheroesRequest(false));
+      dispatch(setCharactersRequest(false));
     };
   };
 
   return {
-    setSuperheroes,
-    setSuperheroesRequest,
-    getSuperheroes,
+    setCharacters,
+    setCharactersRequest,
+    getCharacters,
   };
 };
