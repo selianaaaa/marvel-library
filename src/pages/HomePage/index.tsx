@@ -6,7 +6,7 @@ import { superheroesActions } from '@store';
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(superheroesActions.setSuperheroes([]));
+    dispatch(superheroesActions.getSuperheroes());
   }, []);
 
   return (

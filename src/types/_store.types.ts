@@ -1,3 +1,6 @@
+import { ThunkAction } from 'redux-thunk';
+import { AnyAction } from 'redux';
+
 export interface ISuperHero {
   id: number;
   name: string;
@@ -29,6 +32,13 @@ export interface IStoreAction {
   type: superheroesActionTypes;
   payload?: any;
 }
+
+export type ThunkResult<T, S = Record<string, unknown>> = ThunkAction<
+  T,
+  IAppState & S,
+  object,
+  IStoreAction | AnyAction
+>;
 
 export type IAppAction = Omit<IStoreAction, 'type'> & {
   type: superheroesActionTypes;
