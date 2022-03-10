@@ -4,7 +4,7 @@ import { ISuperheroesState, superheroesActionTypes, IAppAction } from '@types';
 export const initialState: ISuperheroesState = {
   characters: null,
   characters_request: false,
-  selected_character: null,
+  character: null,
 };
 
 export const superheroesReducer: Reducer<ISuperheroesState> = (
@@ -13,7 +13,6 @@ export const superheroesReducer: Reducer<ISuperheroesState> = (
 ) => {
   switch (type) {
     case superheroesActionTypes.SET_CHARACTERS:
-      console.log('SET_CHARACTERS', payload);
       return {
         ...state,
         characters: payload,
@@ -23,10 +22,10 @@ export const superheroesReducer: Reducer<ISuperheroesState> = (
         ...state,
         characters_request: payload,
       };
-    case superheroesActionTypes.SET_SELECTED_CHARACTER:
+    case superheroesActionTypes.SET_CHARACTER:
       return {
         ...state,
-        selected_character: payload,
+        character: payload,
       };
     default:
       return state;

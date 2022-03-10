@@ -24,9 +24,7 @@ export const CharacterCard: React.FC<ICharacterCard> = ({ character }) => {
     <$Character
       as={Link}
       to={`/comics/${id}`}
-      onClick={() =>
-        dispatch(superheroesActions.setSelectedCharacter(character))
-      }
+      onClick={() => dispatch(superheroesActions.setCharacter(character))}
     >
       <$ImageWrapper>
         <$Image imgUrl={`${image.path}.${image.extension}`} />

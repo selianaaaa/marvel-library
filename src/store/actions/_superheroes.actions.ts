@@ -96,11 +96,11 @@ export const createSuperheroesActions = (
   };
 
   /**
-   *  Set selected comic character
-   * @param {ICharacter | null} character - selected comic character
+   *  Set comic character
+   * @param {ICharacter | null} character - comic character
    */
-  const setSelectedCharacter = (character: ICharacter | null): IAppAction => ({
-    type: superheroesActionTypes.SET_SELECTED_CHARACTER,
+  const setCharacter = (character: ICharacter | null): IAppAction => ({
+    type: superheroesActionTypes.SET_CHARACTER,
     payload: character,
   });
 
@@ -110,6 +110,6 @@ export const createSuperheroesActions = (
     getCharacters,
     addCharacters,
     getMoreCharacters,
-    setSelectedCharacter,
+    setCharacter,
   };
 };

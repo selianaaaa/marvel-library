@@ -12,9 +12,9 @@ const ComicsPage: React.FC = () => {
   const dispatch = useDispatch();
   const params = useParams<{ heroId: string }>();
 
-  const selectedCharacter = useSelector(
+  const character = useSelector(
     ({ superheroes }: { superheroes: ISuperheroesState }) =>
-      superheroes.selected_character,
+      superheroes.character,
     shallowEqual,
   );
 
@@ -32,19 +32,16 @@ const ComicsPage: React.FC = () => {
   //   );
   // }
 
-  if (
-    !selectedCharacter ||
-    params.heroId !== selectedCharacter?.id.toString()
-  ) {
+  if (!character || params.heroId !== character?.id.toString()) {
     return <div>Something went wrong</div>;
   }
 
   return (
     <$ComicsPage>
       <$Character>
-        <$CharacterName>{selectedCharacter.name}</$CharacterName>
+        <$CharacterName>{character.name}</$CharacterName>
         <$CharacterImg
-          src={`${selectedCharacter.thumbnail.path}.${selectedCharacter.thumbnail.extension}`}
+          src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
         />
       </$Character>
 
