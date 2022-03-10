@@ -1,8 +1,8 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 import { ICharacter } from '@types';
-import { baseRow, colors } from '@style';
+import { colors } from '@style';
 
 interface ICharacterCard {
   character: ICharacter;
@@ -14,6 +14,7 @@ interface ICharacterCard {
  */
 export const CharacterCard: React.FC<ICharacterCard> = ({ character }) => {
   const { thumbnail: image, name, comics } = character;
+
   return (
     <$Character>
       <$ImageWrapper>
@@ -22,7 +23,6 @@ export const CharacterCard: React.FC<ICharacterCard> = ({ character }) => {
 
       <$Info>
         <$HoverOverlap />
-
         <$Name>{name.toUpperCase()}</$Name>
         <$Comics>{`${comics.available} Comics`}</$Comics>
       </$Info>
@@ -50,18 +50,18 @@ const $Image = styled.div<{ imgUrl: string }>`
 const $HoverOverlap = styled.div`
   position: absolute;
   top: 0;
-  transform: translateY(-97%);
   width: 100%;
   height: 100%;
+  transform: translateY(-97%);
   background: ${colors.SECONDARY};
 `;
 
 const $Info = styled.div`
   position: relative;
   width: 100%;
-  padding: 7px 10px;
   display: grid;
   align-content: space-between;
+  padding: 7px 10px;
 `;
 
 const $Name = styled.div`
@@ -79,10 +79,10 @@ const $Comics = styled.div`
 
 const $Character = styled.div`
   position: relative;
-  width: 180px;
+  width: 190px;
   height: 300px;
   display: grid;
-  grid-template-rows: 180px 1fr;
+  grid-template-rows: 165px 1fr;
   background: ${colors.PRIMARY};
   clip-path: polygon(0 0, 100% 0, 100% 92%, 83% 100%, 0 100%);
   cursor: pointer;

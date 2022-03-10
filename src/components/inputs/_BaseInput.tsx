@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import styled from 'styled-components';
 
 import { baseRow, colors } from '@style';
 
-interface IBaseInput extends React.ComponentProps<'input'> {
+interface IBaseInput extends ComponentProps<'input'> {
   icon?: JSX.Element;
 }
 

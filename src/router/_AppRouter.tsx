@@ -36,5 +36,5 @@ const $Page = styled.div`
 
 const $Content = styled.div`
   position: relative;
-  padding: 0 30px 20px 30px;
+  padding: 0 30px 30px 30px;
 `;

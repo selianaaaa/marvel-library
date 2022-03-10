@@ -2,7 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import styled from 'styled-components';
 
-import { BaseInput, SearchIcon, CharacterCard, Preloader } from '@components';
+import {
+  BaseInput,
+  SearchIcon,
+  CharacterCard,
+  Preloader,
+  BaseButton,
+} from '@components';
 import { superheroesActions } from '@store';
 import { ISuperheroesState, ICharactersData } from '@types';
 import { colors } from '@style';
@@ -56,8 +62,16 @@ const HomePage: React.FC = () => {
       />
 
       <$SearchResult>
-        <CharacterCard character={characters.results[0]} />
+        {characters.results.map((character) => (
+          <CharacterCard key={character.id} character={character} />
+        ))}
       </$SearchResult>
+
+      <$Bottom>
+        <BaseButton onClick={() => console.log('CHARACTERS')}>
+          LOAD MORE
+        </BaseButton>
+      </$Bottom>
     </$HomePage>
   );
 };
@@ -67,23 +81,24 @@ const $HomePage = styled.div`
   width: 100%;
   height: 100%;
   padding-top: 30px;
+  display: grid;
+  grid-template-rows: 30px 1fr 50px;
+  gap: 30px;
 `;
 
 const $SearchResult = styled.div`
   position: relative;
   width: 100%;
-  padding-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 190px);
+  grid-template-rows: repeat(auto-fill, 300px);
+  gap: 10px;
+  justify-items: center;
 `;
 
-// const mapStateToProps = ({
-//   superheroes,
-// }: {
-//   superheroes: ISuperheroesState;
-// }) => ({
-//   characters: superheroes.characters,
-//   charactersRequest: superheroes.characters_request,
-// });
-
-// const HomePage = connect(mapStateToProps, {})(_HomePage);
+const $Bottom = styled.div`
+  position: relative;
+  justify-self: center;
+`;
 
 export default HomePage;
