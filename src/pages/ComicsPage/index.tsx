@@ -6,11 +6,11 @@ import styled from 'styled-components';
 import { Preloader } from '@components';
 import { superheroesActions } from '@store';
 import { ISuperheroesState } from '@types';
-import { colors, baseRow } from '@style';
+import { colors, baseRow, screenSizes } from '@style';
 
 const ComicsPage: React.FC = () => {
   const dispatch = useDispatch();
-  const params = useParams<{ heroId: string }>();
+  const { characterId } = useParams<{ characterId: string }>();
 
   const character = useSelector(
     ({ superheroes }: { superheroes: ISuperheroesState }) =>
@@ -18,21 +18,28 @@ const ComicsPage: React.FC = () => {
     shallowEqual,
   );
 
-  // useEffect(() => {
-  //   if (!characters) {
-  //     dispatch(superheroesActions.getCharacters());
-  //   }
-  // }, []);
+  const characterRequest = useSelector(
+    ({ superheroes }: { superheroes: ISuperheroesState }) =>
+      superheroes.character_request,
+    shallowEqual,
+  );
 
-  // if (charactersRequest) {
-  //   return (
-  //     <$ComicsPage>
-  //       <Preloader />
-  //     </$ComicsPage>
-  //   );
-  // }
+  useEffect(() => {
+    if (characterId && characterId !== character?.id.toString()) {
+      dispatch(superheroesActions.getCharacter(characterId));
+      dispatch(superheroesActions.getComics(characterId));
+    }
+  }, []);
 
-  if (!character || params.heroId !== character?.id.toString()) {
+  if (characterRequest) {
+    return (
+      <$ComicsPage>
+        <Preloader />
+      </$ComicsPage>
+    );
+  }
+
+  if (!character) {
     return <div>Something went wrong</div>;
   }
 
@@ -57,9 +64,6 @@ const $ComicsPage = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  /* display: grid;
-  grid-template-rows: 30px 1fr 50px;
-  gap: 30px; */
 `;
 
 const $Character = styled.div`
@@ -68,8 +72,14 @@ const $Character = styled.div`
   height: 400px;
   background: ${colors.PRIMARY_200};
   clip-path: polygon(50% 0%, 100% 0, 100% 66%, 0 100%, 0 0);
-  ${baseRow('flex-end')};
-  padding: 0 330px 80px 0;
+  ${baseRow()};
+  padding-bottom: 80px;
+
+  @media ${screenSizes.MOBILE} {
+    padding-bottom: 60px;
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 
 const $CharacterName = styled.h1`
@@ -84,6 +94,11 @@ const $CharacterImg = styled.img`
   object-fit: cover;
   border-radius: 50%;
   margin-left: 50px;
+
+  @media ${screenSizes.MOBILE} {
+    margin-left: 0;
+    margin-top: 20px;
+  }
 `;
 
 const $ComicsWrapper = styled.div`
@@ -106,11 +121,6 @@ const $Comics = styled.div`
   grid-template-rows: repeat(auto-fill, 300px);
   gap: 10px;
   justify-items: center;
-`;
-
-const $Bottom = styled.div`
-  position: relative;
-  justify-self: center;
 `;
 
 export default ComicsPage;

@@ -17,7 +17,7 @@ export const AppRouter: React.FC = () => {
           <Suspense fallback={<Preloader />}>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/comics/:heroId" element={<ComiscPage />} />
+              <Route path="/comics/:characterId" element={<ComiscPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>

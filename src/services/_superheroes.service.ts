@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { ICharacter, IMarvelResponse } from '@types';
+import { ICharacter, IMarvelResponse, IComics } from '@types';
 import { urlsConstants } from '@constants';
 import { encodeMd5 } from '@utils';
 
@@ -25,6 +25,44 @@ export class SuperheroesService {
           offset: offset,
         },
       },
+    );
+  }
+
+  /**
+   * The request to get comic character
+   * @param {string} id - character id
+   */
+  getCharacter(id: string) {
+    const timeStamp = new Date().getTime();
+    const privateKey = process.env.REACT_APP_MARVEL_PRIVITE_KEY;
+    const publicKey = process.env.REACT_APP_MARVEL_PUBLIC_KEY;
+    const hash = encodeMd5({
+      timeStamp,
+      privateKey,
+      publicKey,
+    });
+
+    return axios.get<IMarvelResponse<ICharacter[]>>(
+      `${urlsConstants.MARVEL_URL}/characters?id=${id}&ts=${timeStamp}&apikey=${publicKey}&hash=${hash}`,
+    );
+  }
+
+  /**
+   * The request  to get data about comics containing a specific character
+   * @param {string} characterId - character id
+   */
+  getComics(characterId: string) {
+    const timeStamp = new Date().getTime();
+    const privateKey = process.env.REACT_APP_MARVEL_PRIVITE_KEY;
+    const publicKey = process.env.REACT_APP_MARVEL_PUBLIC_KEY;
+    const hash = encodeMd5({
+      timeStamp,
+      privateKey,
+      publicKey,
+    });
+
+    return axios.get<IMarvelResponse<IComics[]>>(
+      `${urlsConstants.MARVEL_URL}/characters/${characterId}/comics?ts=${timeStamp}&apikey=${publicKey}&hash=${hash}`,
     );
   }
 }

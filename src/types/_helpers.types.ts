@@ -18,6 +18,21 @@ export interface ICharacter {
   };
 }
 
+export interface IComicCreator {
+  name: string;
+}
+
+export interface IComics {
+  id: number;
+  digitalId: number;
+  title: string;
+  variantDescription: string;
+  description: string;
+  creators: {
+    items: IComicCreator[];
+  };
+}
+
 export interface IRequestError {
   code: string;
   message: string;
@@ -42,3 +57,4 @@ export interface IMarvelResponse<Result> {
 }
 
 export type ICharactersData = IMarvelResponseData<ICharacter[]>;
+export type IComicsData = IMarvelResponseData<IComics[]>;
