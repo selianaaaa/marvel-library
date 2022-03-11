@@ -24,7 +24,7 @@ export const CharacterCard: React.FC<ICharacterCard> = ({ character }) => {
 
       <$Info>
         <$HoverOverlap />
-        <$Name>{name.toUpperCase()}</$Name>
+        <$Name>{name}</$Name>
         <$Comics>{`${comics.available} Comics`}</$Comics>
       </$Info>
     </$Character>
@@ -62,20 +62,23 @@ const $Info = styled.div`
   width: 100%;
   display: grid;
   align-content: space-between;
-  padding: 7px 10px;
+  padding: 9px 10px;
 `;
 
 const $Name = styled.div`
   position: relative;
   width: 100%;
   color: ${colors.WHITE};
+  font-size: 15px;
+  font-weight: 500;
+  text-transform: uppercase;
 `;
 
 const $Comics = styled.div`
   position: relative;
   width: 100%;
   color: ${colors.GRAY};
-  font-size: 13px;
+  font-size: 12px;
 `;
 
 const $Character = styled.div`

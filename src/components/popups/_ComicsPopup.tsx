@@ -118,7 +118,7 @@ const $Content = styled.div`
     'name name'
     'img description';
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 15px 20px 1fr;
+  grid-template-rows: 15px 25px 1fr;
   gap: 20px;
 `;
 
@@ -142,6 +142,7 @@ const $Name = styled.p`
   font-weight: 600;
   padding-right: 10px;
   grid-area: name;
+  font-size: 17px;
 `;
 
 const $Image = styled.img`
@@ -155,6 +156,7 @@ const $Image = styled.img`
 
 const $Description = styled.p`
   padding-right: 10px;
+  font-size: 14px;
   grid-area: description;
   overflow: auto;
 `;

@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Preloader, ComicsCard, ComicsPopup } from '@components';
+import { Preloader } from '@components';
 import { superheroesActions } from '@store';
-import { ISuperheroesState, IComics } from '@types';
-import { colors, baseRow, screenSizes, cardsGrid } from '@style';
+import { ISuperheroesState } from '@types';
+import { colors, baseRow, screenSizes } from '@style';
+import { ComicsFragment } from './fragments';
 
 const ComicsPage: React.FC = () => {
   const dispatch = useDispatch();
   const { characterId } = useParams<{ characterId: string }>();
-  const [selectedComics, setSelectedComics] = useState<IComics | null>(null);
 
   const character = useSelector(
     ({ superheroes }: { superheroes: ISuperheroesState }) =>
@@ -25,11 +25,6 @@ const ComicsPage: React.FC = () => {
     shallowEqual,
   );
 
-  const comics = useSelector(
-    ({ superheroes }: { superheroes: ISuperheroesState }) => superheroes.comics,
-    shallowEqual,
-  );
-
   useEffect(() => {
     if (characterId && characterId !== character?.id.toString()) {
       dispatch(superheroesActions.getCharacter(characterId));
@@ -37,16 +32,12 @@ const ComicsPage: React.FC = () => {
     }
   }, []);
 
-  if (characterRequest) {
+  if (characterRequest || !character) {
     return (
       <$ComicsPagePreload>
         <Preloader />
       </$ComicsPagePreload>
     );
-  }
-
-  if (!character || !comics) {
-    return <div>Something went wrong</div>;
   }
 
   return (
@@ -59,25 +50,7 @@ const ComicsPage: React.FC = () => {
         />
       </$Character>
 
-      <$ComicsWrapper>
-        <$Title>COMICS</$Title>
-        <$Comics>
-          {comics.map((comicsItem) => (
-            <ComicsCard
-              key={comicsItem.id}
-              comics={comicsItem}
-              onClick={() => setSelectedComics(comicsItem)}
-            />
-          ))}
-        </$Comics>
-      </$ComicsWrapper>
-
-      {selectedComics && (
-        <ComicsPopup
-          comics={selectedComics}
-          closeClick={() => setSelectedComics(null)}
-        />
-      )}
+      <ComicsFragment />
     </$ComicsPage>
   );
 };
@@ -116,7 +89,7 @@ const $Character = styled.div`
   padding-bottom: 80px;
 
   @media ${screenSizes.MOBILE} {
-    padding-bottom: 60px;
+    padding: 0 15px 60px 15px;
     flex-direction: column;
     justify-content: center;
   }
@@ -125,6 +98,11 @@ const $Character = styled.div`
 const $CharacterName = styled.h1`
   color: ${colors.WHITE};
   font-size: 20px;
+  text-transform: uppercase;
+
+  @media ${screenSizes.MOBILE} {
+    text-align: center;
+  }
 `;
 
 const $CharacterImg = styled.img`
@@ -139,25 +117,6 @@ const $CharacterImg = styled.img`
     margin-left: 0;
     margin-top: 20px;
   }
-`;
-
-const $ComicsWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  margin-top: 50px;
-  padding: 0 30px;
-`;
-
-const $Title = styled.p`
-  border-top: 2px solid ${colors.GRAY};
-  padding-top: 10px;
-`;
-
-const $Comics = styled.div`
-  position: relative;
-  width: 100%;
-  margin-top: 20px;
-  ${cardsGrid('200px', '1fr')};
 `;
 
 export default ComicsPage;

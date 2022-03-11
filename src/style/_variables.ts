@@ -3,7 +3,7 @@ export const colors = {
   PRIMARY_100: '#202020',
   PRIMARY_200: '#151515',
   SECONDARY: '#f0141e',
-  GRAY: '#b2b1b1',
+  GRAY: '#bcbbbb',
   WHITE: '#ffffff',
 };
 

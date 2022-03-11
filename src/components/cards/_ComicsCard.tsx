@@ -48,16 +48,19 @@ const $Image = styled.img`
 const $Name = styled.div`
   position: relative;
   width: 100%;
-  margin-top: 15px;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 600;
   color: ${colors.PRIMARY_100};
 `;
 
 const $Creators = styled.div`
   position: relative;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 20px;
   color: ${colors.PRIMARY_200};
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 400;
 `;
 
 const $Comics = styled.div`
@@ -68,9 +71,12 @@ const $Comics = styled.div`
 
   &:hover {
     ${$Image} {
-      box-shadow: 5px 5px 29px -5px rgba(23, 45, 62, 0.2);
-      transform: scale(1.02);
+      transform: translateY(-5px);
       transition: all 0.2s ease-in-out;
+    }
+
+    ${$Name} {
+      color: ${colors.SECONDARY};
     }
   }
 `;
