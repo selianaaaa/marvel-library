@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { CharacterCard, Preloader, BaseButton } from '@components';
 import { superheroesActions } from '@store';
 import { ISuperheroesState } from '@types';
-import { baseRow, colors } from '@style';
+import { baseRow, colors, screenSizes } from '@style';
 
 interface ICharactersFragment {
   searchValue: string;
@@ -80,9 +80,10 @@ const $SearchResult = styled.div`
   position: relative;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 190px);
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   grid-template-rows: repeat(auto-fill, 300px);
-  gap: 10px;
+  gap: 1rem;
+  justify-items: center;
 `;
 
 const $Bottom = styled.div`

@@ -157,11 +157,12 @@ const $Title = styled.p`
 const $Comics = styled.div`
   position: relative;
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 200px);
-  grid-template-rows: repeat(auto-fill, 1fr);
-  gap: 15px;
   margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-rows: repeat(auto-fill, 1fr);
+  gap: 1rem;
+  justify-items: center;
 `;
 
 export default ComicsPage;
