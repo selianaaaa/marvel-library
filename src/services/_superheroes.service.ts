@@ -8,7 +8,7 @@ export class SuperheroesService {
   /**
    * The request to get list of comic characters
    */
-  getCharacters(offset = 0) {
+  getCharacters(offset = 0, nameStartsWith?: string) {
     const timeStamp = new Date().getTime();
     const privateKey = process.env.REACT_APP_MARVEL_PRIVITE_KEY;
     const publicKey = process.env.REACT_APP_MARVEL_PUBLIC_KEY;
@@ -18,13 +18,18 @@ export class SuperheroesService {
       publicKey,
     });
 
+    let queryStr = `ts=${timeStamp}&apikey=${publicKey}&hash=${hash}`;
+
+    if (offset) {
+      queryStr += `&offset=${offset}`;
+    }
+
+    if (nameStartsWith) {
+      queryStr += `&nameStartsWith=${nameStartsWith}`;
+    }
+
     return axios.get<IMarvelResponse<ICharacter[]>>(
-      `${urlsConstants.MARVEL_URL}/characters?ts=${timeStamp}&apikey=${publicKey}&hash=${hash}`,
-      {
-        params: {
-          offset: offset,
-        },
-      },
+      `${urlsConstants.MARVEL_URL}/characters?${queryStr}`,
     );
   }
 

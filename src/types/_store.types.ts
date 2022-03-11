@@ -7,6 +7,7 @@ export enum superheroesActionTypes {
   SET_CHARACTERS = 'set characters',
   SET_CHARACTERS_REQUEST = 'set characters request',
   SET_CHARACTER = 'set character',
+  SET_CHARACTERS_SEARCH = 'set characters search',
   SET_CHARACTER_REQUEST = 'set character request',
   SET_COMICS = 'set comics',
   SET_COMICS_REQUEST = 'set comics request',
@@ -16,6 +17,7 @@ export interface ISuperheroesState {
   characters: ICharactersData | null;
   characters_request: boolean;
   character: ICharacter | null;
+  characters_search: string;
   character_request: boolean;
   comics: IComics[] | null;
   comics_request: boolean;

@@ -32,13 +32,38 @@ export const createSuperheroesActions = (
   });
 
   /**
-   * Executing the request to get data about comic characters
+   *  Set search value for matching characters
+   * @param {string} searchValue - search value
    */
-  const getCharacters = (): ThunkResult<void> => {
+  const setCharactersSearch = (searchValue: string): IAppAction => ({
+    type: superheroesActionTypes.SET_CHARACTERS_SEARCH,
+    payload: searchValue,
+  });
+
+  /**
+   * Executing the request to get data about comic characters
+   * @param {number} offset - offset data request
+   * @param {string} nameStartsWith - value to search matching characters' name
+   */
+  const getCharacters = (
+    offset?: number,
+    nameStartsWith?: string,
+  ): ThunkResult<void> => {
     return async (dispatch) => {
+      if (!offset) {
+        dispatch(setCharacters(null));
+      }
+
+      if (nameStartsWith) {
+        dispatch(setCharactersSearch(nameStartsWith));
+      }
+
       dispatch(setCharactersRequest(true));
       try {
-        const { status, data } = await superheroesService.getCharacters();
+        const { status, data } = await superheroesService.getCharacters(
+          offset,
+          nameStartsWith,
+        );
 
         if (status === httpStatuses.OK) {
           dispatch(setCharacters(data.data));
@@ -78,14 +103,18 @@ export const createSuperheroesActions = (
 
   /**
    * Executing the request to get more  comic characters
+   * @param {string} nameStartsWith - value to search matching characters' name
    */
-  const getMoreCharacters = (): ThunkResult<void> => {
+  const getMoreCharacters = (nameStartsWith?: string): ThunkResult<void> => {
     return async (dispatch, getState) => {
       const { characters } = getState().superheroes;
       const offset = characters ? characters.offset + 20 : 0;
 
       try {
-        const { status, data } = await superheroesService.getCharacters(offset);
+        const { status, data } = await superheroesService.getCharacters(
+          offset,
+          nameStartsWith,
+        );
 
         if (status === httpStatuses.OK) {
           dispatch(addCharacters(data.data));

@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import debouce from 'lodash.debounce';
 
-import {
-  BaseInput,
-  SearchIcon,
-  CharacterCard,
-  Preloader,
-  BaseButton,
-} from '@components';
+import { BaseInput, SearchIcon } from '@components';
 import { superheroesActions } from '@store';
 import { ISuperheroesState } from '@types';
-import { colors } from '@style';
+
+import { CharactersFragment } from './fragments';
 
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();
@@ -26,96 +22,76 @@ const HomePage: React.FC = () => {
       superheroes.characters_request,
     shallowEqual,
   );
+  const charactersSearchValue = useSelector(
+    ({ superheroes }: { superheroes: ISuperheroesState }) =>
+      superheroes.characters_search,
+    shallowEqual,
+  );
 
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState(charactersSearchValue);
+
+  const handleChange = (value: string) => {
+    dispatch(superheroesActions.getCharacters(0, value));
+  };
+
+  const debouncedCharactersSearch = useMemo(() => {
+    return debouce(handleChange, 700);
+  }, []);
 
   useEffect(() => {
     if (!characters) {
-      dispatch(superheroesActions.getCharacters());
+      dispatch(superheroesActions.getCharacters(0, searchValue));
     }
+
+    return () => {
+      debouncedCharactersSearch.cancel();
+    };
   }, []);
 
-  if (charactersRequest) {
-    return (
-      <$HomePagePreload>
-        <Preloader />
-      </$HomePagePreload>
-    );
-  }
-
-  if (!characters || !characters.results.length) {
-    return <div>Nothing found</div>;
-  }
-
   return (
-    <$HomePage>
+    <$HomePage charactersLoading={charactersRequest}>
       <BaseInput
         value={searchValue}
         placeholder="Search character"
         icon={<SearchIcon />}
-        onChange={({ target }) => {
-          setSearchValue(target.value);
+        onChange={(event) => {
+          setSearchValue(event.target.value);
+          debouncedCharactersSearch(event.target.value);
         }}
       />
 
-      <$SearchResult>
-        {characters.results.map((character) => (
-          <CharacterCard key={character.id} character={character} />
-        ))}
-      </$SearchResult>
-
-      <$Bottom>
-        <BaseButton
-          disabled={characters.offset >= characters.total}
-          onClick={() => dispatch(superheroesActions.getMoreCharacters())}
-        >
-          LOAD MORE
-        </BaseButton>
-      </$Bottom>
+      <CharactersFragment searchValue={searchValue} />
     </$HomePage>
   );
 };
 
-const $HomePage = styled.div`
+const $HomePage = styled.div<{ charactersLoading: boolean }>`
   position: relative;
   width: 100%;
   height: 100%;
   padding: 30px;
   display: grid;
-  grid-template-rows: 30px 1fr 50px;
+  grid-template-rows: 30px 1fr;
   gap: 30px;
-`;
 
-const $HomePagePreload = styled($HomePage)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-`;
-
-const $SearchResult = styled.div`
-  position: relative;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 190px);
-  grid-template-rows: repeat(auto-fill, 300px);
-  gap: 10px;
-`;
-
-const $Bottom = styled.div`
-  position: relative;
-  justify-self: center;
+  ${({ charactersLoading }) => {
+    if (charactersLoading) {
+      return css`
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          display: block;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.2);
+        }
+      `;
+    }
+  }}
 `;
 
 export default HomePage;

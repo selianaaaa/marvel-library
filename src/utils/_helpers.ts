@@ -5,6 +5,7 @@ import CryptoJS from 'crypto-js';
  *  @param {string} privateKey
  *  @param {string} publicKey
  *  @param {string} timeStamp
+ *  @returns {CryptoJS.lib.WordArray} encrypred strings
  */
 export const encodeMd5 = ({
   timeStamp,

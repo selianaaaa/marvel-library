@@ -5,6 +5,7 @@ export const initialState: ISuperheroesState = {
   characters: null,
   characters_request: false,
   character: null,
+  characters_search: '',
   character_request: false,
   comics: null,
   comics_request: false,
@@ -25,6 +26,11 @@ export const superheroesReducer: Reducer<ISuperheroesState> = (
       return {
         ...state,
         characters_request: payload,
+      };
+    case superheroesActionTypes.SET_CHARACTERS_SEARCH:
+      return {
+        ...state,
+        characters_search: payload,
       };
     // character
     case superheroesActionTypes.SET_CHARACTER:
