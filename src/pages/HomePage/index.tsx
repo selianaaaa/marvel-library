@@ -87,10 +87,6 @@ const $HomePage = styled.div`
 `;
 
 const $HomePagePreload = styled($HomePage)`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  padding: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
