@@ -1,14 +1,28 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+import styled from 'styled-components';
+
+import { colors, baseRow } from '@style';
 
 const NotFoundPage: React.FC = () => {
-  const dispatch = useDispatch();
-
   return (
-    <div>
-      <div>NOT FOUND PAGE</div>
-    </div>
+    <$NotFoundPage>
+      <$Text>404 PAGE NOT FOUND</$Text>
+    </$NotFoundPage>
   );
 };
+
+const $NotFoundPage = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  ${baseRow()}
+`;
+
+const $Text = styled.div`
+  color: ${colors.GRAY};
+  font-size: 30px;
+  font-weight: 500;
+`;
 
 export default NotFoundPage;
