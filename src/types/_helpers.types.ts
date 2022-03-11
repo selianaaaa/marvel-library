@@ -1,12 +1,14 @@
+export interface IThumbnail {
+  path: string;
+  extension: string;
+}
+
 export interface ICharacter {
   id: number;
   name: string;
   description: string;
   modified: string;
-  thumbnail: {
-    path: string;
-    extension: string;
-  };
+  thumbnail: IThumbnail;
   resourceURI: string;
   comics: {
     available: number;
@@ -28,6 +30,7 @@ export interface IComics {
   title: string;
   variantDescription: string;
   description: string;
+  thumbnail: IThumbnail;
   creators: {
     items: IComicCreator[];
   };

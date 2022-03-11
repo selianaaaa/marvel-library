@@ -3,7 +3,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Preloader } from '@components';
+import { Preloader, ComicsCard } from '@components';
 import { superheroesActions } from '@store';
 import { ISuperheroesState } from '@types';
 import { colors, baseRow, screenSizes } from '@style';
@@ -24,6 +24,11 @@ const ComicsPage: React.FC = () => {
     shallowEqual,
   );
 
+  const comics = useSelector(
+    ({ superheroes }: { superheroes: ISuperheroesState }) => superheroes.comics,
+    shallowEqual,
+  );
+
   useEffect(() => {
     if (characterId && characterId !== character?.id.toString()) {
       dispatch(superheroesActions.getCharacter(characterId));
@@ -39,7 +44,7 @@ const ComicsPage: React.FC = () => {
     );
   }
 
-  if (!character) {
+  if (!character || !comics) {
     return <div>Something went wrong</div>;
   }
 
@@ -54,7 +59,11 @@ const ComicsPage: React.FC = () => {
 
       <$ComicsWrapper>
         <$Title>COMICS</$Title>
-        <$Comics></$Comics>
+        <$Comics>
+          {comics.map((comicsItem) => (
+            <ComicsCard key={comicsItem.id} comics={comicsItem} />
+          ))}
+        </$Comics>
       </$ComicsWrapper>
     </$ComicsPage>
   );
@@ -64,6 +73,7 @@ const $ComicsPage = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  padding-bottom: 30px;
 `;
 
 const $Character = styled.div`
@@ -117,9 +127,9 @@ const $Comics = styled.div`
   position: relative;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 190px);
-  grid-template-rows: repeat(auto-fill, 300px);
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, 200px);
+  grid-template-rows: repeat(auto-fill, 1fr);
+  gap: 15px;
   justify-items: center;
 `;
 
