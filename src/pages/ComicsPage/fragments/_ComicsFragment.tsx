@@ -4,21 +4,31 @@ import styled from 'styled-components';
 
 import { ComicsCard, Preloader, ComicsPopup } from '@components';
 import { ISuperheroesState, IComics } from '@types';
-import { colors, cardsGrid } from '@style';
+import { colors, cardsGrid, baseRow } from '@style';
 
-export const ComicsFragment: React.FC = () => {
-  const [selectedComics, setSelectedComics] = useState<IComics | null>(null);
-
+interface IComicsFragment {
+  setSelectedComics: (comics: IComics) => void;
+}
+export const ComicsFragment: React.FC<IComicsFragment> = ({
+  setSelectedComics,
+}) => {
   const comics = useSelector(
     ({ superheroes }: { superheroes: ISuperheroesState }) => superheroes.comics,
     shallowEqual,
   );
 
-  if (!comics) return null;
+  const comicsRequest = useSelector(
+    ({ superheroes }: { superheroes: ISuperheroesState }) =>
+      superheroes.comics_request,
+    shallowEqual,
+  );
 
-  return (
-    <$ComicsWrapper>
-      <$Title>COMICS</$Title>
+  if (comicsRequest || !comics) {
+    return null;
+  }
+
+  if (comics.length) {
+    return (
       <$Comics>
         {comics.map((comicsItem) => (
           <ComicsCard
@@ -28,28 +38,17 @@ export const ComicsFragment: React.FC = () => {
           />
         ))}
       </$Comics>
+    );
+  }
 
-      {selectedComics && (
-        <ComicsPopup
-          comics={selectedComics}
-          closeClick={() => setSelectedComics(null)}
-        />
-      )}
-    </$ComicsWrapper>
-  );
+  return <$EmptyResult>NO COMICS FOUND</$EmptyResult>;
 };
 
-const $ComicsWrapper = styled.div`
+const $PreloadWrapper = styled.div`
   position: relative;
-  width: 100%;
-  margin-top: 50px;
-  padding: 0 30px;
-`;
-
-const $Title = styled.p`
-  border-top: 2px solid ${colors.GRAY};
-  padding-top: 10px;
-  font-size: 17px;
+  height: 100%;
+  /* background-color: rgba(0, 0, 0, 0.2); */
+  ${baseRow()};
 `;
 
 const $Comics = styled.div`
@@ -57,4 +56,12 @@ const $Comics = styled.div`
   width: 100%;
   margin-top: 20px;
   ${cardsGrid('200px', '1fr')};
+`;
+
+const $EmptyResult = styled.p`
+  text-align: center;
+  color: ${colors.GRAY};
+  margin-top: 40px;
+  font-size: 30px;
+  font-weight: 500;
 `;

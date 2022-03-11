@@ -15,8 +15,6 @@ export const baseRow = (
 export const cardsGrid = (cardMinWidth: string, cardHeigth: string) => {
   return css`
     display: grid;
-    flex-direction: column;
-
     grid-template-columns: repeat(auto-fit, minmax(${cardMinWidth}, 1fr));
     grid-template-rows: repeat(auto-fill, ${cardHeigth});
     gap: 1rem;

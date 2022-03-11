@@ -1,17 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-import { Preloader } from '@components';
+import { Preloader, ComicsPopup } from '@components';
 import { superheroesActions } from '@store';
-import { ISuperheroesState } from '@types';
+import { ISuperheroesState, IComics } from '@types';
 import { colors, baseRow, screenSizes } from '@style';
 import { ComicsFragment } from './fragments';
 
 const ComicsPage: React.FC = () => {
   const dispatch = useDispatch();
   const { characterId } = useParams<{ characterId: string }>();
+  const [selectedComics, setSelectedComics] = useState<IComics | null>(null);
 
   const character = useSelector(
     ({ superheroes }: { superheroes: ISuperheroesState }) =>
@@ -34,9 +35,9 @@ const ComicsPage: React.FC = () => {
 
   if (characterRequest || !character) {
     return (
-      <$ComicsPagePreload>
+      <$ComicsPage characterLoading>
         <Preloader />
-      </$ComicsPagePreload>
+      </$ComicsPage>
     );
   }
 
@@ -50,33 +51,49 @@ const ComicsPage: React.FC = () => {
         />
       </$Character>
 
-      <ComicsFragment />
+      <$ComicsWrapper>
+        <$Title>COMICS</$Title>
+        <ComicsFragment setSelectedComics={setSelectedComics} />
+        {selectedComics && (
+          <ComicsPopup
+            comics={selectedComics}
+            closeClick={() => setSelectedComics(null)}
+          />
+        )}
+      </$ComicsWrapper>
     </$ComicsPage>
   );
 };
 
-const $ComicsPage = styled.div`
+const $ComicsPage = styled.div<{ characterLoading?: boolean }>`
   position: relative;
   width: 100%;
   height: 100%;
   padding-bottom: 30px;
-`;
+  display: grid;
+  grid-template-rows: 400px 1fr;
+  gap: 50px;
 
-const $ComicsPagePreload = styled($ComicsPage)`
-  ${baseRow()};
+  ${({ characterLoading }) => {
+    if (characterLoading) {
+      return css`
+        ${baseRow()};
 
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
-  }
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          display: block;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.2);
+        }
+      `;
+    }
+  }}
 `;
 
 const $Character = styled.div`
@@ -117,6 +134,18 @@ const $CharacterImg = styled.img`
     margin-left: 0;
     margin-top: 20px;
   }
+`;
+
+const $ComicsWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  padding: 0 30px;
+`;
+
+const $Title = styled.p`
+  padding-top: 10px;
+  font-size: 17px;
+  border-top: 2px solid ${colors.GRAY};
 `;
 
 export default ComicsPage;
