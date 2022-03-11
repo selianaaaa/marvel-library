@@ -63,7 +63,6 @@ const $Creators = styled.div`
 const $Comics = styled.div`
   position: relative;
   width: 200px;
-
   text-decoration: none;
   cursor: pointer;
 

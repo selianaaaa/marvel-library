@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { Preloader, ComicsCard, ComicsPopup } from '@components';
 import { superheroesActions } from '@store';
 import { ISuperheroesState, IComics } from '@types';
-import { colors, baseRow, screenSizes } from '@style';
+import { colors, baseRow, screenSizes, cardsGrid } from '@style';
 
 const ComicsPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -90,9 +90,8 @@ const $ComicsPage = styled.div`
 `;
 
 const $ComicsPagePreload = styled($ComicsPage)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${baseRow()};
+
   &:before {
     content: '';
     position: absolute;
@@ -158,11 +157,7 @@ const $Comics = styled.div`
   position: relative;
   width: 100%;
   margin-top: 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-template-rows: repeat(auto-fill, 1fr);
-  gap: 1rem;
-  justify-items: center;
+  ${cardsGrid('200px', '1fr')};
 `;
 
 export default ComicsPage;
