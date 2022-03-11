@@ -92,7 +92,6 @@ const $SearchResult = styled.div`
   grid-template-columns: repeat(auto-fill, 190px);
   grid-template-rows: repeat(auto-fill, 300px);
   gap: 10px;
-  justify-items: center;
 `;
 
 const $Bottom = styled.div`

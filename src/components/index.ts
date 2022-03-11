@@ -4,3 +4,4 @@ export * from './inputs';
 export * from './icons';
 export * from './cards';
 export * from './buttons';
+export * from './popups';

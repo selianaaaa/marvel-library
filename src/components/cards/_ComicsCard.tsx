@@ -6,13 +6,15 @@ import { colors } from '@style';
 
 interface IComicsCard {
   comics: IComics;
+  onClick: () => void;
 }
 
 /**
  * Comics card component
  * @param {IComics} comics - comics info
+ * @param {Function} onClick - click handler
  */
-export const ComicsCard: React.FC<IComicsCard> = ({ comics }) => {
+export const ComicsCard: React.FC<IComicsCard> = ({ comics, onClick }) => {
   const { thumbnail: image, title, creators } = comics;
 
   const getCreatorsLastName = (creators: IComicCreator[]) => {
@@ -26,8 +28,8 @@ export const ComicsCard: React.FC<IComicsCard> = ({ comics }) => {
   };
 
   return (
-    <$Comics>
-      <$Image imgUrl={`${image.path}.${image.extension}`} />
+    <$Comics onClick={onClick}>
+      <$Image src={`${image.path}.${image.extension}`} alt={title} />
 
       <$Name>{title}</$Name>
       <$Creators>{getCreatorsLastName(creators.items)}</$Creators>
@@ -35,14 +37,11 @@ export const ComicsCard: React.FC<IComicsCard> = ({ comics }) => {
   );
 };
 
-const $Image = styled.div<{ imgUrl: string }>`
+const $Image = styled.img`
   position: relative;
   width: 100%;
   height: 300px;
-  background-image: ${({ imgUrl }) => `url(${imgUrl})`};
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
+  object-fit: cover;
   box-shadow: 4px 4px 7px 3px rgba(23, 45, 62, 0.2);
 `;
 
@@ -74,8 +73,5 @@ const $Comics = styled.div`
       transform: scale(1.02);
       transition: all 0.2s ease-in-out;
     }
-  }
-
-  &:not(:hover) {
   }
 `;

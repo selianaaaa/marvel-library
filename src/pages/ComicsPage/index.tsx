@@ -3,14 +3,15 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Preloader, ComicsCard } from '@components';
+import { Preloader, ComicsCard, ComicsPopup } from '@components';
 import { superheroesActions } from '@store';
-import { ISuperheroesState } from '@types';
+import { ISuperheroesState, IComics } from '@types';
 import { colors, baseRow, screenSizes } from '@style';
 
 const ComicsPage: React.FC = () => {
   const dispatch = useDispatch();
   const { characterId } = useParams<{ characterId: string }>();
+  const [selectedComics, setSelectedComics] = useState<IComics | null>(null);
 
   const character = useSelector(
     ({ superheroes }: { superheroes: ISuperheroesState }) =>
@@ -54,6 +55,7 @@ const ComicsPage: React.FC = () => {
         <$CharacterName>{character.name}</$CharacterName>
         <$CharacterImg
           src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+          alt={character.name}
         />
       </$Character>
 
@@ -61,10 +63,21 @@ const ComicsPage: React.FC = () => {
         <$Title>COMICS</$Title>
         <$Comics>
           {comics.map((comicsItem) => (
-            <ComicsCard key={comicsItem.id} comics={comicsItem} />
+            <ComicsCard
+              key={comicsItem.id}
+              comics={comicsItem}
+              onClick={() => setSelectedComics(comicsItem)}
+            />
           ))}
         </$Comics>
       </$ComicsWrapper>
+
+      {selectedComics && (
+        <ComicsPopup
+          comics={selectedComics}
+          closeClick={() => setSelectedComics(null)}
+        />
+      )}
     </$ComicsPage>
   );
 };
@@ -130,7 +143,7 @@ const $Comics = styled.div`
   grid-template-columns: repeat(auto-fill, 200px);
   grid-template-rows: repeat(auto-fill, 1fr);
   gap: 15px;
-  justify-items: center;
+  margin-top: 20px;
 `;
 
 export default ComicsPage;
