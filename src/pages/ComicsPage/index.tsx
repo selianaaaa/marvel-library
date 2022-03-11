@@ -39,9 +39,9 @@ const ComicsPage: React.FC = () => {
 
   if (characterRequest) {
     return (
-      <$ComicsPage>
+      <$ComicsPagePreload>
         <Preloader />
-      </$ComicsPage>
+      </$ComicsPagePreload>
     );
   }
 
@@ -87,6 +87,24 @@ const $ComicsPage = styled.div`
   width: 100%;
   height: 100%;
   padding-bottom: 30px;
+`;
+
+const $ComicsPagePreload = styled($ComicsPage)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
 `;
 
 const $Character = styled.div`

@@ -112,7 +112,6 @@ const $Content = styled.div`
   height: 100%;
   padding: 20px 20px 40px 20px;
   background: ${colors.WHITE};
-
   display: grid;
   grid-template-areas:
     'button button'

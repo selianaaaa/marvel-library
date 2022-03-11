@@ -36,8 +36,7 @@ const zoom = keyframes`
     margin-left: calc(-25px - 10px);
     margin-top: calc(-25px - 10px);
     border-width: 5px;
-    /* border-color: hsla(0, 0%, 100%, 0.7); */
-    border-color: hsl(156deg 94% 47% / 73%);
+    border-color: hsla(0, 0%, 100%, 0.7);
   }
 `;
 

@@ -11,6 +11,7 @@ import {
 } from '@components';
 import { superheroesActions } from '@store';
 import { ISuperheroesState } from '@types';
+import { colors } from '@style';
 
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();
@@ -36,9 +37,9 @@ const HomePage: React.FC = () => {
 
   if (charactersRequest) {
     return (
-      <$HomePage>
+      <$HomePagePreload>
         <Preloader />
-      </$HomePage>
+      </$HomePagePreload>
     );
   }
 
@@ -83,6 +84,28 @@ const $HomePage = styled.div`
   display: grid;
   grid-template-rows: 30px 1fr 50px;
   gap: 30px;
+`;
+
+const $HomePagePreload = styled($HomePage)`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
 `;
 
 const $SearchResult = styled.div`
