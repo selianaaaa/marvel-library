@@ -31,7 +31,7 @@ const ComicsPage: React.FC = () => {
       dispatch(superheroesActions.getCharacter(characterId));
       dispatch(superheroesActions.getComics(characterId));
     }
-  }, []);
+  }, [characterId, character]);
 
   if (characterRequest || !character) {
     return (

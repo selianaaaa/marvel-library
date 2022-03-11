@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
 import styled from 'styled-components';
 
-import { ComicsCard, Preloader, ComicsPopup } from '@components';
+import { ComicsCard } from '@components';
 import { ISuperheroesState, IComics } from '@types';
-import { colors, cardsGrid, baseRow } from '@style';
+import { colors, cardsGrid } from '@style';
 
 interface IComicsFragment {
   setSelectedComics: (comics: IComics) => void;
@@ -43,13 +43,6 @@ export const ComicsFragment: React.FC<IComicsFragment> = ({
 
   return <$EmptyResult>NO COMICS FOUND</$EmptyResult>;
 };
-
-const $PreloadWrapper = styled.div`
-  position: relative;
-  height: 100%;
-  /* background-color: rgba(0, 0, 0, 0.2); */
-  ${baseRow()};
-`;
 
 const $Comics = styled.div`
   position: relative;
