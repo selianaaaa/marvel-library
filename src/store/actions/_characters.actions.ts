@@ -3,7 +3,6 @@ import {
   superheroesActionTypes,
   IAppAction,
   ThunkResult,
-  IRequestError,
   ICharactersData,
 } from '@types';
 import { httpStatuses } from '@constants';
@@ -67,8 +66,11 @@ export const createCharactersActions = (
           dispatch(setCharacters(data.data));
         }
       } catch (error) {
-        console.log(error);
-        alert(error);
+        if (error instanceof Error) {
+          alert(error.message);
+        } else {
+          alert(error);
+        }
       }
       dispatch(setCharactersRequest(false));
     };
@@ -120,7 +122,12 @@ export const createCharactersActions = (
         }
       } catch (error) {
         console.log(error);
-        alert(error);
+
+        if (error instanceof Error) {
+          alert(error.message);
+        } else {
+          alert(error);
+        }
       }
     };
   };

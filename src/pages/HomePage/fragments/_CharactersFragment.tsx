@@ -80,6 +80,7 @@ const $SearchResult = styled.div`
   position: relative;
   width: 100%;
   ${cardsGrid('190px', '300px')};
+  gap: 1rem;
 `;
 
 const $Bottom = styled.div`

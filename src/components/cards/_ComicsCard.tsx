@@ -42,7 +42,7 @@ const $Image = styled.img`
   width: 100%;
   height: 300px;
   object-fit: cover;
-  box-shadow: 4px 4px 7px 3px rgba(23, 45, 62, 0.2);
+  box-shadow: 4px 4px 7px 3px rgba(23, 45, 62, 0.25);
 `;
 
 const $Name = styled.div`

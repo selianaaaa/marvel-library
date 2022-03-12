@@ -1,7 +1,7 @@
 import { ThunkAction } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
-import { ICharactersData, ICharacter, IComics } from './_helpers.types';
+import { ICharactersData, ICharacter, IComics } from './_service.types';
 
 export enum superheroesActionTypes {
   SET_CHARACTERS = 'set characters',

@@ -4,6 +4,9 @@ import { ICharacter, IMarvelResponse, IComics } from '@types';
 import { urlsConstants } from '@constants';
 import { encodeMd5 } from '@utils';
 
+const privateKey = process.env.REACT_APP_MARVEL_PRIVITE_KEY;
+const publicKey = process.env.REACT_APP_MARVEL_PUBLIC_KEY;
+
 export class SuperheroesService {
   /**
    * The request to get list of comic characters
@@ -12,8 +15,6 @@ export class SuperheroesService {
    */
   getCharacters(offset = 0, nameStartsWith?: string) {
     const timeStamp = new Date().getTime();
-    const privateKey = process.env.REACT_APP_MARVEL_PRIVITE_KEY;
-    const publicKey = process.env.REACT_APP_MARVEL_PUBLIC_KEY;
     const hash = encodeMd5({
       timeStamp,
       privateKey,
@@ -41,8 +42,6 @@ export class SuperheroesService {
    */
   getCharacter(id: string) {
     const timeStamp = new Date().getTime();
-    const privateKey = process.env.REACT_APP_MARVEL_PRIVITE_KEY;
-    const publicKey = process.env.REACT_APP_MARVEL_PUBLIC_KEY;
     const hash = encodeMd5({
       timeStamp,
       privateKey,
@@ -60,8 +59,6 @@ export class SuperheroesService {
    */
   getComics(characterId: string) {
     const timeStamp = new Date().getTime();
-    const privateKey = process.env.REACT_APP_MARVEL_PRIVITE_KEY;
-    const publicKey = process.env.REACT_APP_MARVEL_PUBLIC_KEY;
     const hash = encodeMd5({
       timeStamp,
       privateKey,

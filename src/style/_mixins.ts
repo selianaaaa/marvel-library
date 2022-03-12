@@ -17,7 +17,6 @@ export const cardsGrid = (cardMinWidth: string, cardHeigth: string) => {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(${cardMinWidth}, 1fr));
     grid-template-rows: repeat(auto-fill, ${cardHeigth});
-    gap: 1rem;
     justify-items: center;
   `;
 };

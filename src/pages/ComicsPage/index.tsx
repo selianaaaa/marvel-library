@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { Preloader, ComicsPopup } from '@components';
 import { characterActions, comicsActions } from '@store';
 import { ISuperheroesState, IComics } from '@types';
-import { colors, baseRow, screenSizes } from '@style';
+import { colors, screenSizes } from '@style';
 import { ComicsFragment, CharacterFragment } from './fragments';
 
 const ComicsPage: React.FC = () => {
@@ -76,11 +76,15 @@ const $ComicsPage = styled.div<{ characterLoading?: boolean }>`
 const $ComicsWrapper = styled.div`
   width: 100%;
   padding: 0 30px;
+
+  @media ${screenSizes.MOBILE} {
+    padding: 0 20px;
+  }
 `;
 
 const $Title = styled.p`
-  padding-top: 10px;
-  font-size: 17px;
+  padding-top: 20px;
+  font-size: 19px;
   border-top: 2px solid ${colors.GRAY_100};
 `;
 

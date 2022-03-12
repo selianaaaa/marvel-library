@@ -49,6 +49,7 @@ const $Comics = styled.div`
   width: 100%;
   margin-top: 20px;
   ${cardsGrid('200px', '1fr')};
+  gap: 50px 2%;
 `;
 
 const $EmptyResult = styled.p`

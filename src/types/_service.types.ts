@@ -38,11 +38,6 @@ export interface IComics {
   };
 }
 
-export interface IRequestError {
-  code: string;
-  message: string;
-}
-
 export interface IMarvelResponseData<Result> {
   offset: number;
   limit: number;

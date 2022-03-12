@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import debouce from 'lodash.debounce';
 
 import { BaseInput, SearchIcon } from '@components';
