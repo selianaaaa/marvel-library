@@ -96,13 +96,12 @@ const $Popup = styled.div`
   transition: all 0.5s ease;
 
   @media ${screenSizes.MOBILE} {
-    top: 0;
+    top: -20px;
     left: 0;
     right: 0;
     bottom: 0;
     width: 100%;
     height: 100%;
-    transform: translateX(0);
   }
 `;
 
@@ -118,18 +117,24 @@ const $Content = styled.div`
     'name name'
     'img description';
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 15px 25px 1fr;
+  grid-template-rows: auto auto 1fr;
   gap: 20px;
+  overflow: auto;
+
+  @media ${screenSizes.MOBILE} {
+    padding: 20px 15px;
+    grid-template-columns: 1fr 1.5fr;
+  }
 `;
 
 const $CloseButton = styled.button`
   position: relative;
   width: 15px;
   height: 15px;
-  cursor: pointer;
   border: none;
   outline: none;
   background: transparent;
+  cursor: pointer;
   justify-self: end;
   grid-area: button;
 
@@ -152,11 +157,14 @@ const $Image = styled.img`
   object-fit: cover;
   box-shadow: 4px 4px 7px 3px rgba(23, 45, 62, 0.2);
   grid-area: img;
+
+  @media ${screenSizes.MOBILE} {
+    height: auto;
+  }
 `;
 
 const $Description = styled.p`
   padding-right: 10px;
   font-size: 14px;
   grid-area: description;
-  overflow: auto;
 `;
