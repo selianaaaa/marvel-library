@@ -7,6 +7,8 @@ import { encodeMd5 } from '@utils';
 export class SuperheroesService {
   /**
    * The request to get list of comic characters
+   * @param {number} offset - request offset
+   * @param {string} nameStartsWith - value to search matching characters
    */
   getCharacters(offset = 0, nameStartsWith?: string) {
     const timeStamp = new Date().getTime();

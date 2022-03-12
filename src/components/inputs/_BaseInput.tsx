@@ -36,6 +36,7 @@ export const BaseInput: React.FC<IBaseInput> = ({
         onChange={changeHandler}
         onFocus={(e) => (e.target.placeholder = '')}
         onBlur={(e) => (e.target.placeholder = placeholder)}
+        data-testid="input-value"
       />
     </$InputWrapper>
   );

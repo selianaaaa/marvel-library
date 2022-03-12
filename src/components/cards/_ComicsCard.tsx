@@ -76,7 +76,8 @@ const $Comics = styled.div`
     }
 
     ${$Name} {
-      color: ${colors.SECONDARY};
+      color: ${colors.SECONDARY_200};
+      transition: all 0.2s ease-in-out;
     }
   }
 `;

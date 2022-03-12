@@ -7,12 +7,10 @@ import { AppRouter } from './router';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <Provider store={store}>
-        <GlobalStyles />
-        <AppRouter />
-      </Provider>
-    </div>
+    <Provider store={store}>
+      <GlobalStyles />
+      <AppRouter />
+    </Provider>
   );
 };
 

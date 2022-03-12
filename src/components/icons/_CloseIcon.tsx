@@ -8,6 +8,7 @@ import { colors } from '@style';
  * @param {string} fill - fill color
  * @param {number} width - width of the icon
  * @param {number} height - height of the icon
+ * @param {Function} onClick - click handler
  */
 export const CloseIcon: React.FC<IBaseIcon> = ({
   fill = colors.PRIMARY_100,

@@ -3,6 +3,11 @@ export interface IThumbnail {
   extension: string;
 }
 
+export interface ICharacterComisc {
+  name: string;
+  resourceURI: string;
+}
+
 export interface ICharacter {
   id: number;
   name: string;
@@ -13,10 +18,7 @@ export interface ICharacter {
   comics: {
     available: number;
     collectionURI: string;
-    items: {
-      name: string;
-      resourceURI: string;
-    };
+    items: ICharacterComisc[];
   };
 }
 

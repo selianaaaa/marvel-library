@@ -70,6 +70,7 @@ export const createSuperheroesActions = (
         }
       } catch (error) {
         console.log(error);
+        alert(error);
       }
       dispatch(setCharactersRequest(false));
     };
@@ -121,6 +122,7 @@ export const createSuperheroesActions = (
         }
       } catch (error) {
         console.log(error);
+        alert(error);
       }
     };
   };
@@ -158,6 +160,7 @@ export const createSuperheroesActions = (
         }
       } catch (error) {
         console.log(error);
+        alert(error);
       }
       dispatch(setCharacterRequest(false));
     };
@@ -198,6 +201,7 @@ export const createSuperheroesActions = (
         }
       } catch (error) {
         console.log(error);
+        alert(error);
       }
       dispatch(setComicsRequest(false));
     };

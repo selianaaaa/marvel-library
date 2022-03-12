@@ -54,7 +54,7 @@ const $HoverOverlap = styled.div`
   width: 100%;
   height: 100%;
   transform: translateY(-97%);
-  background: ${colors.SECONDARY};
+  background: ${colors.SECONDARY_100};
 `;
 
 const $Info = styled.div`

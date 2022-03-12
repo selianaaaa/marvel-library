@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import marvelLogo from '@assets/marvel_logo.svg';
+import { MarvelIcon } from '@components';
 import { colors, baseRow } from '@style';
 
 /**
@@ -11,7 +11,7 @@ import { colors, baseRow } from '@style';
 export const Navbar: React.FC = () => (
   <$Navbar>
     <$Link to="/">
-      <$MarvelLogo src={marvelLogo} />
+      <MarvelIcon width={125} height={60} />
     </$Link>
   </$Navbar>
 );
@@ -24,13 +24,15 @@ const $Navbar = styled.div`
   ${baseRow()};
 `;
 
-const $MarvelLogo = styled.img`
-  position: relative;
-  width: 125px;
-  height: 60px;
-  object-fit: contain;
-`;
-
 const $Link = styled(Link)`
   text-decoration: none;
+
+  &:hover {
+    svg {
+      path:first-of-type {
+        fill: ${colors.SECONDARY_200};
+        transition: 0.2s;
+      }
+    }
+  }
 `;
