@@ -53,7 +53,7 @@ const $Comics = styled.div`
 
 const $EmptyResult = styled.p`
   text-align: center;
-  color: ${colors.GRAY};
+  color: ${colors.GRAY_100};
   margin-top: 40px;
   font-size: 30px;
   font-weight: 500;

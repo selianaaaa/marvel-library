@@ -58,7 +58,7 @@ const $Input = styled.input`
   color: ${colors.PRIMARY_100};
 
   &::placeholder {
-    color: ${colors.GRAY};
+    color: ${colors.GRAY_100};
   }
 `;
 

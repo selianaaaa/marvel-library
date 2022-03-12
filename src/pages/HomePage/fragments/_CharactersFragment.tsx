@@ -90,7 +90,7 @@ const $Bottom = styled.div`
 const $EmptyResult = styled.p`
   justify-self: center;
   align-self: center;
-  color: ${colors.GRAY};
+  color: ${colors.GRAY_100};
   font-size: 30px;
   font-weight: 500;
 `;

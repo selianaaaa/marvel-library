@@ -12,15 +12,23 @@ export const CharacterFragment: React.FC = () => {
     shallowEqual,
   );
 
-  if (!character) return <div>Wrong character</div>;
+  const characterRequest = useSelector(
+    ({ superheroes }: { superheroes: ISuperheroesState }) =>
+      superheroes.character_request,
+    shallowEqual,
+  );
 
   return (
     <$Character>
-      <$CharacterName>{character.name}</$CharacterName>
-      <$CharacterImg
-        src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-        alt={character.name}
-      />
+      {character && !characterRequest && (
+        <>
+          <$CharacterName>{character?.name}</$CharacterName>
+          <$CharacterImg
+            src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+            alt={character.name}
+          />
+        </>
+      )}
     </$Character>
   );
 };

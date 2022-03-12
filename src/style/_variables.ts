@@ -4,7 +4,8 @@ export const colors = {
   PRIMARY_200: '#151515',
   SECONDARY_100: '#f0141e',
   SECONDARY_200: '#ae0000',
-  GRAY: '#bcbbbb',
+  GRAY_100: '#bcbbbb',
+  GRAY_200: '#e3e3e3',
   WHITE: '#ffffff',
 };
 

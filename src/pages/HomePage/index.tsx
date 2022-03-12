@@ -8,6 +8,7 @@ import { charactersActions } from '@store';
 import { ISuperheroesState } from '@types';
 
 import { CharactersFragment } from './fragments';
+import { colors } from '@style';
 
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();
@@ -73,25 +74,8 @@ const $HomePage = styled.div<{ charactersLoading: boolean }>`
   display: grid;
   grid-template-rows: 30px 1fr;
   gap: 30px;
-
-  ${({ charactersLoading }) => {
-    if (charactersLoading) {
-      return css`
-        &:before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          display: block;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.2);
-        }
-      `;
-    }
-  }}
+  background: ${({ charactersLoading }) =>
+    charactersLoading ? colors.GRAY_200 : colors.WHITE};
 `;
 
 export default HomePage;

@@ -77,7 +77,7 @@ const $Name = styled.div`
 const $Comics = styled.div`
   position: relative;
   width: 100%;
-  color: ${colors.GRAY};
+  color: ${colors.GRAY_100};
   font-size: 12px;
 `;
 

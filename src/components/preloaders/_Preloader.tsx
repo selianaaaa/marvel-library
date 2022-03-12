@@ -17,16 +17,18 @@ export const Preloader: React.FC = () => (
 );
 
 const $PreloaderWrapper = styled.div`
-  position: relative;
-  width: 70px;
-  height: 70px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   ${baseRow()};
 `;
 
 const $Preloader = styled.div`
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 70px;
+  height: 70px;
   align-self: center;
 `;
 

@@ -26,6 +26,12 @@ const ComicsPage: React.FC = () => {
     shallowEqual,
   );
 
+  const comicsRequest = useSelector(
+    ({ superheroes }: { superheroes: ISuperheroesState }) =>
+      superheroes.comics_request,
+    shallowEqual,
+  );
+
   useEffect(() => {
     if (characterId && characterId !== character?.id.toString()) {
       dispatch(characterActions.getCharacter(characterId));
@@ -33,21 +39,17 @@ const ComicsPage: React.FC = () => {
     }
   }, [characterId, character]);
 
-  if (characterRequest || !character) {
-    return (
-      <$ComicsPage characterLoading>
-        <Preloader />
-      </$ComicsPage>
-    );
-  }
-
   return (
-    <$ComicsPage>
+    <$ComicsPage characterLoading={characterRequest || comicsRequest}>
       <CharacterFragment />
 
       <$ComicsWrapper>
         <$Title>COMICS</$Title>
-        <ComicsFragment setSelectedComics={setSelectedComics} />
+        {comicsRequest ? (
+          <Preloader />
+        ) : (
+          <ComicsFragment setSelectedComics={setSelectedComics} />
+        )}
       </$ComicsWrapper>
 
       {selectedComics && (
@@ -61,38 +63,17 @@ const ComicsPage: React.FC = () => {
 };
 
 const $ComicsPage = styled.div<{ characterLoading?: boolean }>`
-  position: relative;
   width: 100%;
   height: 100%;
   padding-bottom: 30px;
   display: grid;
   grid-template-rows: 400px 1fr;
   gap: 50px;
-
-  ${({ characterLoading }) => {
-    if (characterLoading) {
-      return css`
-        ${baseRow()};
-
-        &:before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          display: block;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.2);
-        }
-      `;
-    }
-  }}
+  background: ${({ characterLoading }) =>
+    characterLoading ? colors.GRAY_200 : colors.WHITE};
 `;
 
 const $ComicsWrapper = styled.div`
-  position: relative;
   width: 100%;
   padding: 0 30px;
 `;
@@ -100,7 +81,7 @@ const $ComicsWrapper = styled.div`
 const $Title = styled.p`
   padding-top: 10px;
   font-size: 17px;
-  border-top: 2px solid ${colors.GRAY};
+  border-top: 2px solid ${colors.GRAY_100};
 `;
 
 export default ComicsPage;

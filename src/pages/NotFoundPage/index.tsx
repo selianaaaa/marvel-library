@@ -20,7 +20,7 @@ const $NotFoundPage = styled.div`
 `;
 
 const $Text = styled.div`
-  color: ${colors.GRAY};
+  color: ${colors.GRAY_100};
   font-size: 30px;
   font-weight: 500;
 `;
