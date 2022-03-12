@@ -3,7 +3,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import styled from 'styled-components';
 
 import { CharacterCard, Preloader, BaseButton } from '@components';
-import { superheroesActions } from '@store';
+import { charactersActions } from '@store';
 import { ISuperheroesState } from '@types';
 import { baseRow, colors, cardsGrid } from '@style';
 
@@ -48,7 +48,7 @@ export const CharactersFragment: React.FC<ICharactersFragment> = ({
             <BaseButton
               disabled={characters.offset >= characters.total}
               onClick={() =>
-                dispatch(superheroesActions.getMoreCharacters(searchValue))
+                dispatch(charactersActions.getMoreCharacters(searchValue))
               }
             >
               LOAD MORE

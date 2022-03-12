@@ -1,4 +1,8 @@
 import { superheroesService } from '@services';
-import { createSuperheroesActions } from './_superheroes.actions';
+import { createCharactersActions } from './_characters.actions';
+import { createCharacterActions } from './_character.actions';
+import { createComicsActions } from './_comics.actions';
 
-export const superheroesActions = createSuperheroesActions(superheroesService);
+export const charactersActions = createCharactersActions(superheroesService);
+export const characterActions = createCharacterActions(superheroesService);
+export const comicsActions = createComicsActions(superheroesService);

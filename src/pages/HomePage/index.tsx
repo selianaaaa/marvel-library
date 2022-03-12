@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import debouce from 'lodash.debounce';
 
 import { BaseInput, SearchIcon } from '@components';
-import { superheroesActions } from '@store';
+import { charactersActions } from '@store';
 import { ISuperheroesState } from '@types';
 
 import { CharactersFragment } from './fragments';
@@ -31,7 +31,7 @@ const HomePage: React.FC = () => {
   const [searchValue, setSearchValue] = useState(charactersSearchValue);
 
   const handleChange = (value: string) => {
-    dispatch(superheroesActions.getCharacters(0, value));
+    dispatch(charactersActions.getCharacters(0, value));
   };
 
   const debouncedCharactersSearch = useMemo(() => {
@@ -40,7 +40,7 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     if (!characters) {
-      dispatch(superheroesActions.getCharacters(0, searchValue));
+      dispatch(charactersActions.getCharacters(0, searchValue));
     }
 
     return () => {
