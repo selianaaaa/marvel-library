@@ -5,6 +5,7 @@ build
 yarn-error.log
 tsconfig.tsbuildinfo
 .env
+env
 
 npm-debug.log*
 yarn-debug.log*
